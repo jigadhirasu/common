@@ -1,5 +1,0 @@
-package jgorm
-
-func MariaDB() {
-
-}
