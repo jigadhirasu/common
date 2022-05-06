@@ -27,43 +27,36 @@ func (a *Record) UU(uuid ...string) string {
 	return ""
 }
 
-type RecordShell struct {
+type RecordPack struct {
 	OpID     string `gorm:"column:OpID; index; type:varchar(40) AS (JSON_VALUE(Doc, '$.OpID'))"`
 	TargetID string `gorm:"column:TargetID; index(target); type:varchar(40) AS (JSON_VALUE(Doc, '$.TargetID'))"`
 	Target   string `gorm:"column:Target; index(target); type:varchar(40) AS (JSON_VALUE(Doc, '$.Target'))"`
 	Method   string `gorm:"column:Method; type:varchar(40) AS (JSON_VALUE(Doc, '$.Method'))"`
 	Pack
+	Query
+	Targets []string `gorm:"-"`
 }
 
-func (RecordShell) TableName() string {
+func (RecordPack) TableName() string {
 	return "records"
 }
 
-type RecordQuery struct {
-	TargetID string
-	Target   string
-	Targets  []string
-	OpID     string
-	Query
-}
-
-func (RecordQuery) TableName() string {
-	return Record{}.TableName()
-}
-func (m RecordQuery) Where(tx *gorm.DB) *gorm.DB {
+func (m RecordPack) Where(tx *gorm.DB) *gorm.DB {
+	if m.OpID != "" {
+		tx = tx.Where("OpID = ?", m.OpID)
+	}
 	if m.TargetID != "" {
 		tx = tx.Where("TargetID = ?", m.TargetID)
 	}
 	if m.Target != "" {
 		tx = tx.Where("Target = ?", m.Target)
 	}
+	if m.Method != "" {
+		tx = tx.Where("Method = ?", m.Method)
+	}
 	if len(m.Targets) > 0 {
 		tx = tx.Where("Target IN ?", m.Targets)
 	}
-	if m.OpID != "" {
-		tx = tx.Where("OpID = ?", m.OpID)
-	}
-
 	return tx
 }
 
