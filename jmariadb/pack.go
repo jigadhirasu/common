@@ -3,7 +3,7 @@ package jmariadb
 import (
 	"time"
 
-	"github.com/jigadhirasu/jgorm/jcommon"
+	"github.com/jigadhirasu/common/jcommon"
 )
 
 type Pack struct {

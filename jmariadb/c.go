@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/jigadhirasu/jgorm/jcommon"
+	"github.com/jigadhirasu/common/jcommon"
 	"gorm.io/datatypes"
 	"gorm.io/gorm"
 )

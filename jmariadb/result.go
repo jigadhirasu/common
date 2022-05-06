@@ -1,6 +1,6 @@
 package jmariadb
 
-import "github.com/jigadhirasu/jgorm/jcommon"
+import "github.com/jigadhirasu/common/jcommon"
 
 type Result struct {
 	UUID         string         `json:",omitempty"`

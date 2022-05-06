@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"reflect"
 
-	"github.com/jigadhirasu/jgorm/jcommon"
+	"github.com/jigadhirasu/common/jcommon"
 	"gorm.io/gorm"
 )
 

@@ -1,8 +1,8 @@
 package jmariadb
 
 import (
-	"github.com/jigadhirasu/jgorm/jcommon"
-	"github.com/jigadhirasu/jgorm/jtype"
+	"github.com/jigadhirasu/common/jcommon"
+	"github.com/jigadhirasu/common/jtype"
 	"gorm.io/gorm"
 )
 

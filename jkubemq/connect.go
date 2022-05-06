@@ -5,7 +5,7 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/jigadhirasu/jgorm/jcommon"
+	"github.com/jigadhirasu/common/jcommon"
 	"github.com/kubemq-io/kubemq-go"
 )
 

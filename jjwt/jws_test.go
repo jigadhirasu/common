@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jigadhirasu/jgorm/jjwt"
-	"github.com/jigadhirasu/jgorm/jlog"
+	"github.com/jigadhirasu/common/jjwt"
+	"github.com/jigadhirasu/common/jlog"
 )
 
 func TestPublicKey(t *testing.T) {

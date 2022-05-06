@@ -1,4 +1,4 @@
-module github.com/jigadhirasu/jgorm
+module github.com/jigadhirasu/common
 
 go 1.18
 
