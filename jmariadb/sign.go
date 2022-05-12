@@ -1,7 +1,7 @@
 package jmariadb
 
 import (
-	"github.com/jigadhirasu/common/jcommon"
+	"github.com/jigadhirasu/common/j"
 	"github.com/jigadhirasu/common/jtype"
 	"gorm.io/gorm"
 )
@@ -11,12 +11,12 @@ type Sign struct {
 	UserType  string // iadmin iagent islot
 	UserAgent string
 	Address   string
-	Region    string         `json:",omitempty"` // 區域
-	City      string         `json:",omitempty"` // 城市
-	Method    string         `json:",omitempty"` // in password otp
-	Reason    *jcommon.Error `json:",omitempty"` // 錯誤訊息
-	SignAt    *jtype.Time    `json:",omitempty"`
-	SignOut   *jtype.Time    `json:",omitempty"`
+	Region    string      `json:",omitempty"` // 區域
+	City      string      `json:",omitempty"` // 城市
+	Method    string      `json:",omitempty"` // in password otp
+	Reason    *j.Error    `json:",omitempty"` // 錯誤訊息
+	SignAt    *jtype.Time `json:",omitempty"`
+	SignOut   *jtype.Time `json:",omitempty"`
 }
 
 func (a *Sign) UU(uuid ...string) string {

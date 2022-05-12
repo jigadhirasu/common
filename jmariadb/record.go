@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"reflect"
 
-	"github.com/jigadhirasu/common/jcommon"
+	"github.com/jigadhirasu/common/j"
 	"gorm.io/gorm"
 )
 
@@ -15,8 +15,8 @@ type Record struct {
 	Method   string
 	Target   string
 	TargetID string
-	OpBefore jcommon.Bytes
-	OpAfter  jcommon.Bytes
+	OpBefore j.Bytes
+	OpAfter  j.Bytes
 }
 
 func (Record) TableName() string {
@@ -65,10 +65,10 @@ func diff(old, new interface{}) error {
 	o := reflect.ValueOf(old)
 	n := reflect.ValueOf(new)
 	if o.Kind() != reflect.Ptr {
-		return jcommon.NewErr(484, "diff target is not ptr")
+		return j.NewErr(484, "diff target is not ptr")
 	}
 	if o.Kind() != n.Kind() {
-		return jcommon.NewErr(484, "diff target is not ptr")
+		return j.NewErr(484, "diff target is not ptr")
 	}
 	diffStruct(o, n)
 	return nil
@@ -99,12 +99,12 @@ func diffStruct(old, new reflect.Value) {
 		if of.CanSet() {
 			IsCompare := func() bool {
 				switch nf.Interface().(type) {
-				case []byte, json.RawMessage, jcommon.Bytes:
-					return bytes.Equal(nf.Interface().(jcommon.Bytes), of.Interface().(jcommon.Bytes))
+				case []byte, json.RawMessage, j.Bytes:
+					return bytes.Equal(nf.Interface().(j.Bytes), of.Interface().(j.Bytes))
 				case int, int8, int64, string, float64:
 					return nf.Interface() == of.Interface()
 				default:
-					return bytes.Equal(jcommon.JSON(nf.Interface()), jcommon.JSON(of.Interface()))
+					return bytes.Equal(j.JSON(nf.Interface()), j.JSON(of.Interface()))
 				}
 			}()
 			if IsCompare {
@@ -140,10 +140,10 @@ func diffMap(old, new reflect.Value) {
 		if of.CanSet() {
 			IsCompare := func() bool {
 				switch nf.Interface().(type) {
-				case []byte, json.RawMessage, jcommon.Bytes:
-					return bytes.Equal(nf.Interface().(jcommon.Bytes), of.Interface().(jcommon.Bytes))
+				case []byte, json.RawMessage, j.Bytes:
+					return bytes.Equal(nf.Interface().(j.Bytes), of.Interface().(j.Bytes))
 				case []string:
-					return bytes.Equal(jcommon.JSON(nf.Interface()), jcommon.JSON(of.Interface()))
+					return bytes.Equal(j.JSON(nf.Interface()), j.JSON(of.Interface()))
 				default:
 					return nf.Interface() == of.Interface()
 				}

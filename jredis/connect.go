@@ -10,7 +10,8 @@ import (
 
 var dbr *redis.Client
 
-func Redis() *redis.Client {
+// Client
+func Client() *redis.Client {
 	if dbr != nil {
 		return dbr
 	}

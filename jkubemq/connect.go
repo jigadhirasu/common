@@ -5,15 +5,16 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/jigadhirasu/common/jcommon"
+	"github.com/jigadhirasu/common/j"
 	"github.com/kubemq-io/kubemq-go"
 )
 
-type KubeMQFunc func(tags jcommon.Tags, bytes jcommon.Bytes) jcommon.Bytes
+type KubeMQFunc func(tags j.Tags, bytes j.Bytes) j.Bytes
 
 var kubeMQ *kubemq.Client
 
-func KubeMQ(ctxx ...context.Context) *kubemq.Client {
+// use context or gen new context
+func Client(ctxx ...context.Context) *kubemq.Client {
 	if kubeMQ != nil {
 		return kubeMQ
 	}

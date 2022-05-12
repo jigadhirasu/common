@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/jigadhirasu/common/jcommon"
+	"github.com/jigadhirasu/common/j"
 	"gorm.io/datatypes"
 	"gorm.io/gorm"
 )
@@ -73,24 +73,24 @@ func (c C) Count(tx *gorm.DB) int64 {
 	return count
 }
 
-func (c C) Value(tx *gorm.DB) jcommon.Bytes {
+func (c C) Value(tx *gorm.DB) j.Bytes {
 	tx = c.Where(tx)
 	bb := [][]byte{}
 	tx.Limit(1).Pluck(c.Select(), &bb)
 	if len(bb) > 0 {
 		return bb[0]
 	}
-	return jcommon.Bytes{}
+	return j.Bytes{}
 }
 
-func (c C) Values(tx *gorm.DB) jcommon.Bytes {
+func (c C) Values(tx *gorm.DB) j.Bytes {
 	tx = c.Where(tx)
 	bb := [][]byte{}
 	tx.Limit(1).Pluck(fmt.Sprintf(`JSON_ARRAYAGG(%s)`, c.Select())+" as Doc", &bb)
 	if len(bb) > 0 {
 		return bb[0]
 	}
-	return jcommon.Bytes{}
+	return j.Bytes{}
 }
 
 type KV map[string]interface{}
